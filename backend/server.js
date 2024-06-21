@@ -21,6 +21,9 @@ connectDB();
 
 // api endpoint
 app.use("/api/food", foodRouter)
+app.use("/images", express.static('uploads'))
+// used to server statics files such as images, css , js files
+// '/images/filename' endpoint can be used to access the file inside uploads folder
 
 app.get("/", (req,res) => {
     res.send("API working")
