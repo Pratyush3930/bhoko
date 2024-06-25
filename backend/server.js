@@ -5,6 +5,11 @@ import express from 'express'
 import cors from 'cors'
 import { connectDB } from './config/db.js';
 import foodRouter from './routes/foodRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import dotenv from "dotenv";
+
+dotenv.config(); // Load environment variables from .env file
+
 
 // app config
 const app = express()
@@ -24,11 +29,11 @@ app.use("/api/food", foodRouter)
 app.use("/images", express.static('uploads'))
 // used to server statics files such as images, css , js files
 // '/images/filename' endpoint can be used to access the file inside uploads folder
+app.use("/api/user",userRouter);
+
 
 app.get("/", (req,res) => {
     res.send("API working")
 })
 
 app.listen(PORT,() => console.log(`App listening on port ${PORT}`))
-
-// 

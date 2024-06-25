@@ -5,6 +5,17 @@ import { assets } from "../../assets/assets";
 
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Sign Up");
+  const [data, setData] = useState({
+    name: "",
+    email: "", 
+    password: ""
+  })
+
+  const onChangeHandler = (e) => {
+    const inputName = e.target.name;
+    const value = e.target.value;
+    setData(data => ({...data, [inputName]:value}))
+  }
 
   return (
     <div className="login-popup">
@@ -17,10 +28,10 @@ const LoginPopup = ({ setShowLogin }) => {
           {currState === "Login" ? (
             <></>
           ) : (
-            <input type="text" placeholder="Your name" required />
+            <input type="text" name="name" onChange={onChangeHandler} value={data.name} placeholder="Your name" required />
           )}
-          <input type="email" placeholder="Your email" required />
-          <input type="password" placeholder="Password" required />
+          <input type="email" name="email" onChange={onChangeHandler} value={data.email}placeholder="Your email" required />
+          <input type="password" name="password" onChange={onChangeHandler} value={data.password} placeholder="Password" required />
         </div>
         <button>{currState === "Sign Up" ? "Create account" : "Login"}</button>
         <div className="login-popup-condition">
