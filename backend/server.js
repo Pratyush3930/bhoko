@@ -8,6 +8,7 @@ import foodRouter from "./routes/foodRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import dotenv from "dotenv";
 import cartRouter from "./routes/cartRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -31,6 +32,7 @@ app.use("/images", express.static("uploads"));
 // '/images/filename' endpoint can be used to access the file inside uploads folder
 app.use("/api/user", userRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter)
 
 app.get("/", (req, res) => {
   res.send("API working");
