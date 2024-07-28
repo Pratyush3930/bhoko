@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../context/Context";
+import axios from "axios";
 
 const PlaceOrder = () => {
   const { getTotalCartAmount, token, food_list, cartItems, url } =
@@ -34,7 +35,19 @@ const PlaceOrder = () => {
         orderItems.push(itemInfo);
       }
     })
-    console.log(orderItems); // to check
+    let orderData = {
+      address: data,
+      items: orderItems,
+      amount: getTotalCartAmount() + 2,
+    }
+    let response = await axios.post(url + "/api/order/place", orderData,{headers: {token}});
+    if(response.data.success){
+      const {session_url} = response.data;
+      window.location.replace(session_url);
+    }
+    else{
+      alert("Error");
+    }
   }
 
   return (
@@ -42,8 +55,8 @@ const PlaceOrder = () => {
       <div className="place-order-left">
         <p className="title">Delivery information</p>
         <div className="multi-fields">
-          <input required name='firstname' onChange={onChangeHandler} value={data.firstName} type="text" placeholder="First name" />
-          <input required name="lastname" onChange={onChangeHandler} value={data.lastName} type="text" placeholder="Last name" />
+          <input required name='firstName' onChange={onChangeHandler} value={data.firstName} type="text" placeholder="First name" />
+          <input required name="lastName" onChange={onChangeHandler} value={data.lastName} type="text" placeholder="Last name" />
         </div>
         <input required name="email" onChange={onChangeHandler} value={data.email} type="email" placeholder="Email address" />
         <input required name="street" onChange={onChangeHandler} value={data.street} type="text" placeholder="Street" />
