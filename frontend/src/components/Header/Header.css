@@ -1,10 +1,11 @@
 .header{
     height: 34vw;
     margin: 30px auto;
-    background: url('/header_img.png') no-repeat;
+    background: url('./header_image.jpg') no-repeat;
     /* the source of url is from the public folder */
-    background-size: contain;
+    background-size: cover;
     position: relative;
+    border-radius: 20px;
 }
 
 .header-contents {
@@ -33,7 +34,7 @@
 
 .header-contents button{
     border: none;
-    color: #747474;
+    color: #282727;
     font-weight: 500;
     padding: 1vw 2.3vw;
     background-color: white;
